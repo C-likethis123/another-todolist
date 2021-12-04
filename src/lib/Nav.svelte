@@ -6,7 +6,7 @@
     try{
       const res = await fetch('/projects');
       const data = await res.json();
-      projects = data.projects;
+      projects = data;
     } catch(err) {
       projects = [];
     }
