@@ -1,38 +1,46 @@
 <script>
-export let name;
-let tasks = [];
+  import Task from "./Task.svelte";
 
-let isVisible = false;
+  export let name;
+  let tasks = [];
 
-function toggleAddTask() {
-  isVisible = !isVisible;
-}
+  let isVisible = false;
 
-let title = '';
-let description = '';
-function submitTask() {
-  tasks = [...tasks, {
-    title,
-    description,
-  }];
+  function toggleAddTask() {
+    isVisible = !isVisible;
+  }
 
-  title="";
-  description="";
-}
+  let title = "";
+  let description = "";
+  function submitTask() {
+    tasks = [
+      ...tasks,
+      {
+        title,
+        description,
+        completed: false,
+      },
+    ];
+
+    title = "";
+    description = "";
+  }
 </script>
 
 <h3>{name}</h3>
 
 {#each tasks as task}
-<div class="border-solid rounded">
-  <div>{task.title}</div>
-  <div>{task.description}</div>
-</div>
+  <Task {...task} />
 {/each}
 
 {#if isVisible}
   <div id="add-task" data-testid="add-task">
-    <input id="title" class="w-full p-2" placeholder="Add a new task"  bind:value={title} />
+    <input
+      id="title"
+      class="w-full p-2"
+      placeholder="Add a new task"
+      bind:value={title}
+    />
     <textarea
       id="description"
       class="w-full p-2"
@@ -54,11 +62,13 @@ function submitTask() {
     </svg>
     <button
       class="rounded bg-red-300 p-2 hover:bg-red-500"
-      on:click|preventDefault={submitTask}>Add Task
-      </button>
+      on:click|preventDefault={submitTask}
+      >Add Task
+    </button>
     <button
       class="rounded bg-gray-300 p-2 hover:bg-gray-400"
-      on:click={toggleAddTask}>Cancel
+      on:click={toggleAddTask}
+      >Cancel
     </button>
   </div>
 {:else}
