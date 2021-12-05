@@ -12,7 +12,9 @@ export async function load({fetch, page}) {
     console.log(err)
     return {
       props: {
-        project: []
+        project: {
+          taskLists: []
+        }
       }
     }
   }
@@ -20,18 +22,24 @@ export async function load({fetch, page}) {
 </script>
 
 <script>
+  import TaskListDisplay from '../../components/TaskListDisplay.svelte';
+
 export let project;
 let newTaskList = '';
 async function addTaskList(e) {
   if (e.charCode === 13) {
-    const res = await fetch(`/taskList`, {
-      method: 'POST',
-      body: JSON.stringify({name: newTaskList}),
-    });
-    const {taskList} = await res.json();
-    project.taskLists = [...(project.taskLists), taskList]; 
+    // const res = await fetch(`/taskList`, {
+    //   method: 'POST',
+    //   body: JSON.stringify({name: newTaskList}),
+    // });
+    // const {taskList} = await res.json();
+    project.taskLists = [...(project.taskLists), {name: newTaskList}]; 
     newTaskList = '';
   }
+}
+
+function showTaskList() {
+  document.querySelector("#addTaskList").focus();
 }
 </script>
 
@@ -54,7 +62,8 @@ input {
 <h2 class="text-3xl">{project.name}</h2>
 <br />
 {#each project.taskLists as taskList}
+<TaskListDisplay name={taskList.name}></TaskListDisplay>
 {/each}
 
-<label>Add Task List</label>
-<input bind:value={newTaskList} on:keypress={addTaskList}/>
+<button class="rounded border-solid hover:bg-gray-300 p-2" on:click={showTaskList}>Add Task List</button>
+<input id="addTaskList" class="border-2 border-solid rounded" bind:value={newTaskList} on:keypress={addTaskList}/>
