@@ -27,6 +27,14 @@
   }
 </script>
 
+<style>
+  h3 {
+    font-size: large;
+    font-weight: 700;
+  }
+</style>
+
+<div class="p-5">
 <h3>{name}</h3>
 
 {#each tasks as task}
@@ -74,3 +82,4 @@
 {:else}
   <button on:click={toggleAddTask}>Add New Task</button>
 {/if}
+</div>

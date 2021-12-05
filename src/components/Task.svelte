@@ -4,7 +4,7 @@
   export let completed;
 </script>
 
-<div class="border-2 p-2 border-solid rounded m-5">
+<div class="border-2 p-2 border-solid rounded my-5">
   <div class="flex">
     <div>
       <input bind:checked={completed} type="checkbox" />
