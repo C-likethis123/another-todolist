@@ -55,7 +55,7 @@ h2 {
       <ul>
         {#each projects as project}
           <li class="hover:bg-gray-300">
-            <a href={`projects/${project._id}`}>{project.name}</a>
+            <a href={`http://${import.meta.env.VITE_HOST_NAME}/projects/${project._id}`}>{project.name}</a>
             <span>{project.taskCount}</span>
           </li>
         {/each}
