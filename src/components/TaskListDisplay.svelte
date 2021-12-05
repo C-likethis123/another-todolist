@@ -31,9 +31,8 @@ function submitTask() {
 {/each}
 
 {#if isVisible}
-  <div>
-    <input id="title" class="w-full p-2" placeholder="Add a new task"       bind:value={title}
-    />
+  <div id="add-task" data-testid="add-task">
+    <input id="title" class="w-full p-2" placeholder="Add a new task"  bind:value={title} />
     <textarea
       id="description"
       class="w-full p-2"
